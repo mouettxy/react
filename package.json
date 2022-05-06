@@ -4,11 +4,9 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "set-dev": "$env:NODE_ENV='development'",
-    "set-prod": "$env:NODE_ENV='production'",
-    "build:dev": "webpack --config webpack.config.js",
-    "build:prod": "webpack --config webpack.config.js",
-    "dev": "node ./bin/dev.js",
+    "build-prod": "env NODE_ENV=production webpack --config webpack.config.js",
+    "build-dev": "env NODE_ENV=development webpack --config webpack.config.js",
+    "dev": "env NODE_ENV=development node ./bin/dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
