@@ -1,0 +1,46 @@
+.menuItemsList {
+  padding: 0 20px;
+}
+
+.menuItem {
+  padding: 12px 0;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.menuItem > svg + span {
+  margin-left: 7px;
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  background-color: var(--greyEC);
+}
+
+.comments, .comments + .divider {
+  display: none;
+}
+
+.share, .share + .divider {
+  display: none;
+}
+
+.save, .save + .divider {
+  display: none;
+}
+
+@media all and (min-width: 1024px) {
+  .comments, .comments + .divider {
+    display: block;
+  }
+  
+  .share, .share + .divider {
+    display: block;
+  }
+  
+  .save, .save + .divider {
+    display: block;
+  }
+}
