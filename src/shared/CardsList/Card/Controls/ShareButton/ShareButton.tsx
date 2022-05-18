@@ -1,11 +1,12 @@
 import React from "react";
-import { Icon } from "../../../../Icon";
+import { Button, EButtonStyle } from "../../../../Button";
 import styles from "./sharebutton.css";
 
 interface IShareButtonProps {
+  buttonStyle?: EButtonStyle;
   children?: React.ReactNode;
 }
 
-export function ShareButton({ children }: IShareButtonProps) {
-  return <button className={styles.shareButton}>{children}</button>;
+export function ShareButton({ children, buttonStyle }: IShareButtonProps) {
+  return <Button {...buttonStyle}>{children}</Button>;
 }

@@ -1,16 +1,15 @@
 import React from "react";
-import { Icon } from "../../../../Icon";
+import { Button, EButtonStyle } from "../../../../Button";
 import styles from "./commentsbutton.css";
 
 interface ICommentsButtonProps {
+  buttonStyle?: EButtonStyle;
   children?: React.ReactNode;
 }
 
-export function CommentsButton({ children }: ICommentsButtonProps) {
-  return (
-    <button className={styles.commentsButton}>
-      {children}
-      <span className={styles.commentsNumber}>777</span>
-    </button>
-  );
+export function CommentsButton({
+  children,
+  buttonStyle,
+}: ICommentsButtonProps) {
+  return <Button {...buttonStyle}>{children}</Button>;
 }

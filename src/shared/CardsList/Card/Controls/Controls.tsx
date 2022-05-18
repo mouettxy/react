@@ -4,21 +4,28 @@ import { CommentsButton } from "./CommentsButton";
 import { KarmaCounter } from "./KarmaCounter";
 import { ShareButton } from "./ShareButton";
 import { SaveButton } from "./SaveButton";
-import { Icon } from "../../../Icon";
+import * as Icons from "../../../Icons";
+import { Button } from "../../../Button";
+import { EColor, Text } from "../../../Text";
 
 export function Controls() {
   return (
     <div className={styles.controls}>
       <KarmaCounter />
-      <CommentsButton>
-        <Icon name="commentsIcon" />
-      </CommentsButton>
+      <div className={styles.commentsButton}>
+        <CommentsButton>
+          <Icons.CommentsIcon />
+          <Text size={12} color={EColor.greyC4}>
+            777
+          </Text>
+        </CommentsButton>
+      </div>
       <div className={styles.actions}>
         <ShareButton>
-          <Icon name="shareIcon" />
+          <Icons.ShareIcon />
         </ShareButton>
         <SaveButton>
-          <Icon name="saveIcon" />
+          <Icons.SaveIcon />
         </SaveButton>
       </div>
     </div>

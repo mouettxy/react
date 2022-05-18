@@ -1,0 +1,19 @@
+.default-btn {
+  display: flex;
+  border: none;
+  background-color: transparent;
+}
+
+.default-btn > svg + span {
+  margin-left: 6px;
+}
+
+.menu-btn {
+  display: flex;
+  border: none;
+  background-color: transparent;
+}
+
+.menu-btn > svg + span {
+  margin-left: 7px;
+}
