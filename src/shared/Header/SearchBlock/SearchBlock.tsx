@@ -1,10 +1,10 @@
-import React from 'react';
-import styles from './searchblock.css';
+import React from "react";
+import styles from "./searchblock.css";
 
-export function SearchBlock() {
-  return (
-    <div className = {styles.searchBlock}>
-      searchBlock content
-    </div>
-  );
+interface ISearchBlock {
+  children?: React.ReactChild;
+}
+
+export function SearchBlock({ children }: ISearchBlock) {
+  return <div className={styles.searchBlock}>{children}</div>;
 }

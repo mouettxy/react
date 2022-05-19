@@ -1,15 +1,18 @@
-import React from 'react';
-import styles from './header.css';
-import { SearchBlock } from './SearchBlock';
-import { SortBlock } from './SortBlock';
-import { ThreadTitle } from './ThreadTitle';
+import React from "react";
+import styles from "./header.css";
+import { SearchBlock } from "./SearchBlock";
+import { UserBlock } from "./SearchBlock/UserBlock";
+import { SortBlock } from "./SortBlock";
+import { ThreadTitle } from "./ThreadTitle";
 
 export function Header() {
   return (
     <header className={styles.header}>
-      <SearchBlock/>
-      <ThreadTitle/>
-      <SortBlock/>
+      <SearchBlock>
+        <UserBlock />
+      </SearchBlock>
+      <ThreadTitle />
+      <SortBlock />
     </header>
   );
 }

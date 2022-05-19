@@ -6,3 +6,4 @@ export * from './SaveIcon';
 export * from './CommentsIcon';
 export * from './SaveMenuIcon';
 export * from './ShareMenuIcon';
+export * from './AnonAvatar';

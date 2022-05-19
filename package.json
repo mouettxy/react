@@ -6,12 +6,13 @@
   "scripts": {
     "build-prod": "env NODE_ENV=production webpack --config webpack.config.js",
     "build-dev": "env NODE_ENV=development webpack --config webpack.config.js",
-    "dev": "env NODE_ENV=development node ./bin/dev.js",
+    "dev": "env NODE_ENV=development CLIENT_ID=7v973u0qLIJ4GgB4v50z0w node ./bin/dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "classnames": "^2.3.1",
     "express": "^4.17.1",
     "nodemon": "^2.0.12",
     "react": "^17.0.1",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "@hot-loader/react-dom": "^17.0.1",
+    "@types/classnames": "^2.3.1",
     "@types/react": "^17.0.45",
     "@types/react-dom": "^18.0.3",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
