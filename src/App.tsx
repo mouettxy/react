@@ -8,11 +8,14 @@ import { CardsList } from "./shared/CardsList";
 import { Dropdown } from "./shared/Dropdown";
 import { EColor, Text } from "./shared/Text";
 import { Icon } from "./shared/Icon";
+import { useToken } from "./hooks/useToken";
 
 function AppComponent() {
+  const [token] = useToken();
+
   return (
     <Layout>
-      <Header />
+      <Header token={token} />
       <Content>
         <CardsList />
       </Content>
