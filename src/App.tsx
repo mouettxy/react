@@ -9,18 +9,24 @@ import { Dropdown } from "./shared/Dropdown";
 import { EColor, Text } from "./shared/Text";
 import { Icon } from "./shared/Icon";
 import { useToken } from "./hooks/useToken";
+import { tokenContext } from "./shared/context/tokenContext";
+import { UserContextProvider } from "./shared/context/userContext";
 
 function AppComponent() {
   const [token] = useToken();
 
   return (
-    <Layout>
-      <Header token={token} />
-      <Content>
-        <CardsList />
-      </Content>
-    </Layout>
+    <tokenContext.Provider value={token}>
+      <UserContextProvider>
+        <Layout>
+          <Header />
+          <Content>
+            <CardsList />
+          </Content>
+        </Layout>
+      </UserContextProvider>
+    </tokenContext.Provider>
   );
 }
 
-export const App = hot(AppComponent);
+export const App = hot(() => <AppComponent />);
