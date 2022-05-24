@@ -8,19 +8,19 @@ import { tokenContext } from "../shared/context/tokenContext";
 // }
 
 export  function usePostsData() {
-  const [posts, setPosts] = useState({});
+  const [posts, setPosts] = useState([]);
   const token = useContext(tokenContext);
 
   useEffect(() => {
     if (token && token.length > 0) {
       axios
-        .get("https://oauth.reddit.com/api/best", {
+        .get("https://oauth.reddit.com/best", {
           headers: { Authorization: `bearer ${token}` },
         })
         .then((resp) => {
-           console.log(resp);
-          //  const postsData = // найти массив из ответа
-          //  setPosts(postsData);
+          const postsData = resp.data.data.children
+          console.log(postsData);
+          setPosts(postsData);
         })
         .catch(console.log);
     }
