@@ -25,6 +25,9 @@ app.get('/auth',(req,res)=>{
       indexTemplate(ReactDOM.renderToString(App()), data['access_token'])
       )
   })
+  .catch((e) => {
+    res.redirect('http://localhost:3000')
+  })
 })
 
 app.listen(3000,()=>{
