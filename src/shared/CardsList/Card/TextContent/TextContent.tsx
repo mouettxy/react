@@ -5,9 +5,16 @@ import { Title } from "./Title";
 interface ITextContent {
   author: string;
   title: string;
+  createdAt: Date;
 }
 
-export function TextContent({ author, title }: ITextContent) {
+export function TextContent({ author, title, createdAt }: ITextContent) {
+  const yyyy = createdAt.getFullYear();
+  const mm = createdAt.getMonth() + 1;
+  const dd = createdAt.getDate();
+
+  const newCreatedAt = dd + "." + mm + "." + yyyy;
+
   return (
     <div className={styles.textContent}>
       <div className={styles.metaData}>
@@ -22,8 +29,8 @@ export function TextContent({ author, title }: ITextContent) {
           </a>
         </div>
         <span className={styles.createdAt}>
-          <span className={styles.publishedLabel}>опубликовано </span>4 часа
-          назад
+          <span className={styles.publishedLabel}>опубликовано </span>
+          {newCreatedAt}
         </span>
       </div>
       <Title title={title} />

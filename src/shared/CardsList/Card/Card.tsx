@@ -15,19 +15,22 @@ interface IListItem {
 
 interface IData {
   title: string;
-  id: number;
+  id: string;
   author: string;
+  thumbnail: string;
+  created: number;
 }
 
 export function Card({ listItem }: ICard) {
   const title = listItem.data.title;
   const author = listItem.data.author;
-  const id = listItem.data.id;
+  const previewImg = listItem.data.thumbnail;
+  const createdAt = new Date(listItem.data.created * 1000);
 
   return (
-    <li className={styles.card} key={id}>
-      <TextContent title={title} author={author} />
-      <Preview />
+    <li className={styles.card}>
+      <TextContent title={title} author={author} createdAt={createdAt} />
+      <Preview img={previewImg} />
       <Menu />
       <Controls />
     </li>
