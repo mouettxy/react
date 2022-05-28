@@ -51,9 +51,9 @@
     transform: unset;
   }
   
-  .dropdown {
+  /* .dropdown {
     right: -59px;
-  }
+  } */
 }
 
 @media all and (min-width: 1540px) {

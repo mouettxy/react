@@ -4,7 +4,7 @@ import { Title } from "./Title";
 
 interface ITextContent {
   author: string;
-  title: string;
+  title?: string;
   createdAt: Date;
 }
 

@@ -12,6 +12,7 @@ interface IButtonProps {
   href?: string;
   buttonStyle?: EButtonStyle;
   children?: React.ReactNode;
+  onClick?: () => void;
 }
 
 export function Button(props: IButtonProps) {
@@ -20,9 +21,14 @@ export function Button(props: IButtonProps) {
     buttonStyle = EButtonStyle.default,
     href,
     children,
+    onClick,
   } = props;
 
   const classes = classNames(styles[buttonStyle]);
 
-  return <As className={classes}>{children}</As>;
+  return (
+    <As className={classes} onClick={onClick}>
+      {children}
+    </As>
+  );
 }

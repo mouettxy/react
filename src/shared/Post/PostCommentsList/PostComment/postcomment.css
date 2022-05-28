@@ -1,0 +1,96 @@
+.textContent {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.PostCommentItem {
+  margin-bottom: 38px;
+}
+
+.textContent > * + * {
+  padding: 7px 0 0;
+}
+
+.postComment {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  font-size: 10px;
+  line-height: 12px;
+  margin-bottom: 14px;
+}
+
+.publishedLabel {
+  display: none;
+}
+
+.createdAt, .createdAt span {
+  color: var(--grey99);
+}
+
+.userLink {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  height: 20px;
+  padding: 0 6px 0 0;
+}
+
+.avatar {
+  border-radius: 20px;
+  width: 20px;
+  height: 20px;
+  margin: 0 7px 0 0;
+}
+
+.username {
+  color: var(--orange);
+  position: relative;
+  z-index: 1;
+}
+
+.controls {
+  display: flex;
+}
+
+.commentText {
+  size: 14px;
+  line-height: 24px;
+}
+
+@media all and (min-width: 1024px) {
+  .userLink {
+    padding: 0 0px 0 5px;
+    margin-right: 10px;
+  }
+
+  .textContent {
+    flex-basis: 540px;
+    margin: 0 0 0 38px;
+    flex-flow: column-reverse nowrap;
+    justify-content: center;
+  }
+  .textContent > * {
+    flex: 0 0;
+  }
+
+  .postComment {
+    flex-flow: row nowrap;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .publishedLabel {
+    display: inline;
+  }
+}
+
+@media all and (min-width: 1540px) {
+  .userLink:hover a {
+    text-decoration: underline;
+  }
+
+  .textContent {
+    flex-basis: 672px;
+  }
+}
