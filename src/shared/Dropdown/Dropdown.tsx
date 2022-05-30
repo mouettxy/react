@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useRef } from "react";
 import ReactDOM from "react-dom";
-import styles from "./dropdown.css";
+import { usePopper } from "react-popper";
+import style from "./dropdown.css";
 
 interface IDropdownProps {
   button: React.ReactNode;
@@ -28,6 +29,13 @@ export function Dropdown({
 
   const node = document.querySelector("#dropdown_root");
   if (!node) return null;
+  const [referenceElement, setReferenceElement] =
+    React.useState<HTMLDivElement | null>(null);
+  const [popperElement, setPopperElement] =
+    React.useState<HTMLDivElement | null>(null);
+  const { styles, attributes } = usePopper(referenceElement, popperElement, {
+    placement: "bottom-end",
+  });
 
   const handleOpen = () => {
     // if (isOpen === undefined) {
@@ -37,13 +45,18 @@ export function Dropdown({
   };
 
   return (
-    <div className={styles.container}>
+    <div className={style.container} ref={setReferenceElement}>
       <div onClick={handleOpen}>{button}</div>
       {isDropdownOpen &&
         ReactDOM.createPortal(
-          <div className={styles.listContainer}>
+          <div
+            className={style.listContainer}
+            ref={setPopperElement}
+            style={styles.popper}
+            {...attributes.popper}
+          >
             <div
-              className={styles.list}
+              className={style.list}
               onClick={() => setIsDropdownOpen(false)}
             >
               {children}

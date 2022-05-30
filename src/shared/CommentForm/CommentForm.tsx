@@ -1,4 +1,11 @@
-import React, { ChangeEvent, FormEvent, useContext, useRef } from "react";
+import React, {
+  ChangeEvent,
+  FormEvent,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { commentContext } from "../context/commentContext";
 import styles from "./commentform.css";
 
@@ -11,18 +18,23 @@ export function CommentForm({
   buttonText = "comment",
   replyReciever,
 }: ICommentForm) {
-  let { value, onChange } = useContext(commentContext);
+  // let { value, onChange } = useContext(commentContext);
   // if (replyReciever !== undefined) {
-  //   onChange(replyReciever);
+  //   setValue(replyReciever);
   // }
-  if (value == "" && replyReciever !== undefined) {
-    value = replyReciever;
-  }
+  // if (value == "" && replyReciever !== undefined) {
+  //   value = replyReciever;
+  // }
 
-  // const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const [value, setValue] = useState(replyReciever);
+
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  useEffect(() => {
+    textAreaRef.current?.focus();
+  }, []);
 
   function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    onChange(event.target.value);
+    setValue(event.target.value);
   }
 
   function handleSubmit(event: FormEvent) {
@@ -31,8 +43,7 @@ export function CommentForm({
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <textarea
-        autoFocus
-        // ref={textAreaRef}
+        ref={textAreaRef}
         className={styles.input}
         value={value}
         onChange={handleChange}
