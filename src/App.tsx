@@ -5,38 +5,55 @@ import { Layout } from "./shared/Layout";
 import { Header } from "./shared/Header";
 import { Content } from "./shared/Content";
 import { CardsList } from "./shared/CardsList";
-import { Dropdown } from "./shared/Dropdown";
-import { EColor, Text } from "./shared/Text";
-import { Icon } from "./shared/Icon";
-import { useToken } from "./hooks/useToken";
-import { tokenContext } from "./shared/context/tokenContext";
 import { UserContextProvider } from "./shared/context/userContext";
 import { PostsContextProvider } from "./shared/context/postsContext";
-import { commentContext } from "./shared/context/commentContext";
+
+import {
+  ActionCreator,
+  AnyAction,
+  legacy_createStore as createStore,
+  Reducer,
+} from "redux";
+import { Provider, useDispatch } from "react-redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+
+export type RootState = {
+  token: string;
+};
+const initialState: RootState = {
+  token: "777",
+};
+export const setToken: ActionCreator<AnyAction> = (token) => ({
+  type: "SET_TOKEN",
+  token: token,
+});
+const rootReducer: Reducer<RootState> = (state = initialState, action) => {
+  switch (action.type) {
+    case "SET_TOKEN":
+      return {
+        ...state,
+        token: action.token,
+      };
+    default:
+      return state;
+  }
+};
+const store = createStore(rootReducer, composeWithDevTools());
 
 function AppComponent() {
-  const [commentValue, setCommentValue] = useState("");
-  const [token] = useToken();
-
-  const CommentProvider = commentContext.Provider;
-
   return (
-    <tokenContext.Provider value={token}>
+    <Provider store={store}>
       <UserContextProvider>
         <PostsContextProvider>
-          <CommentProvider
-            value={{ value: commentValue, onChange: setCommentValue }}
-          >
-            <Layout>
-              <Header />
-              <Content>
-                <CardsList />
-              </Content>
-            </Layout>
-          </CommentProvider>
+          <Layout>
+            <Header />
+            <Content>
+              <CardsList />
+            </Content>
+          </Layout>
         </PostsContextProvider>
       </UserContextProvider>
-    </tokenContext.Provider>
+    </Provider>
   );
 }
 

@@ -1,6 +1,7 @@
+import { RootState, setToken } from './../App';
 import { useEffect, useState, useContext } from "react";
 import axios from 'axios';
-import { tokenContext } from "../shared/context/tokenContext";
+import { useDispatch, useSelector, useStore } from "react-redux";
 
 interface IUserData {
   name?: string;
@@ -8,8 +9,12 @@ interface IUserData {
 }
 
 export function useUserData() {
+  const dispatch = useDispatch();
+  if (window.__token__) {
+    dispatch(setToken(window.__token__));
+  }
+  const token = useSelector<RootState, string>(state => state.token);
   const [data, setData] = useState<IUserData>({});
-  const token = useContext(tokenContext)
 
   useEffect(() => {
     if (token && token.length > 0) {

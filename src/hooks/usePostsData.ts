@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import axios from 'axios';
-import { tokenContext } from "../shared/context/tokenContext";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, setToken } from "../App";
 
 // interface IUserData {
 //   name?: string;
@@ -8,8 +9,14 @@ import { tokenContext } from "../shared/context/tokenContext";
 // }
 
 export  function usePostsData() {
+  const dispatch = useDispatch();
+  if (window.__token__) {
+    dispatch(setToken(window.__token__));
+  }
   const [posts, setPosts] = useState([]);
-  const token = useContext(tokenContext);
+  // const token = useContext(tokenContext);
+  
+  const token = useSelector<RootState, string>(state => state.token);
 
   useEffect(() => {
     if (token && token.length > 0) {
