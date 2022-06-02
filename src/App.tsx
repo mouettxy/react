@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./main.global.css";
 import { hot } from "react-hot-loader/root";
 import { Layout } from "./shared/Layout";
@@ -8,36 +8,11 @@ import { CardsList } from "./shared/CardsList";
 import { UserContextProvider } from "./shared/context/userContext";
 import { PostsContextProvider } from "./shared/context/postsContext";
 
-import {
-  ActionCreator,
-  AnyAction,
-  legacy_createStore as createStore,
-  Reducer,
-} from "redux";
-import { Provider, useDispatch } from "react-redux";
+import { legacy_createStore as createStore } from "redux";
+import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { rootReducer } from "./store";
 
-export type RootState = {
-  token: string;
-};
-const initialState: RootState = {
-  token: "777",
-};
-export const setToken: ActionCreator<AnyAction> = (token) => ({
-  type: "SET_TOKEN",
-  token: token,
-});
-const rootReducer: Reducer<RootState> = (state = initialState, action) => {
-  switch (action.type) {
-    case "SET_TOKEN":
-      return {
-        ...state,
-        token: action.token,
-      };
-    default:
-      return state;
-  }
-};
 const store = createStore(rootReducer, composeWithDevTools());
 
 function AppComponent() {
