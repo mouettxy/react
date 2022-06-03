@@ -18,6 +18,7 @@ interface IData {
 
 export function CardsList() {
   const respPosts: Array<IRespPosts> = useContext(postsContext);
+  console.log(respPosts);
 
   return (
     <ul className={styles.cardsList}>

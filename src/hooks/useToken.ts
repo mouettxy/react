@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setToken } from "../store";
+import { setToken } from "../store/token/actions";
 
 
 export function useToken() {

@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store";
+import { RootState } from "../store/reducer";
 
 // interface IUserData {
 //   name?: string;
