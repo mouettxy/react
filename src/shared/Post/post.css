@@ -27,3 +27,81 @@
   margin: -24px;
   color: #000
 }
+
+.image {
+  display: flex;
+  margin: 0 auto;
+}
+
+.createdAt, .createdAt span {
+  color: var(--grey99);
+}
+
+.userLink {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  height: 20px;
+  padding: 0 6px 0 0;
+}
+
+.avatar {
+  border-radius: 20px;
+  width: 20px;
+  height: 20px;
+  margin: 0 7px 0 0;
+}
+
+.username {
+  color: var(--orange);
+  position: relative;
+  z-index: 1;
+}
+
+.metaData {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.title {
+  font-weight: normal;
+  margin: 0;
+  padding: 0 0 10px 0;
+  font-size: 20px;
+  line-height: 23px;
+}
+
+.header {
+  display: flex;
+  margin-bottom: 26px;
+}
+
+.header > div {
+  margin-right: 20px;
+}
+
+@media all and (min-width: 1024px) {
+  .userLink {
+    padding: 0 0 0 5px;
+  }
+
+  .publishedLabel {
+    display: inline;
+  }
+
+  .metaData {
+    flex-flow: row-reverse nowrap;
+    justify-content: flex-end;
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
+
+@media all and (min-width: 1540px) {
+  .userLink:hover a {
+    text-decoration: underline;
+  }
+}

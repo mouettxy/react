@@ -1,4 +1,5 @@
 import React from "react";
+import { IData } from "../../CardsList";
 import styles from "./textcontent.css";
 import { Title } from "./Title";
 
@@ -6,9 +7,20 @@ interface ITextContent {
   author: string;
   title?: string;
   createdAt: Date;
+  text?: string;
 }
 
-export function TextContent({ author, title, createdAt }: ITextContent) {
+export function TextContent({
+  title,
+  id,
+  author,
+  thumbnail,
+  created,
+  selftext,
+  preview,
+  ups,
+}: IData) {
+  const createdAt = new Date(created * 1000);
   const yyyy = createdAt.getFullYear();
   const mm = createdAt.getMonth() + 1;
   const dd = createdAt.getDate();
@@ -33,7 +45,16 @@ export function TextContent({ author, title, createdAt }: ITextContent) {
           {newCreatedAt}
         </span>
       </div>
-      <Title title={title} />
+      <Title
+        title={title}
+        author={author}
+        created={created}
+        selftext={selftext}
+        id={id}
+        thumbnail={thumbnail}
+        preview={preview}
+        ups={ups}
+      />
     </div>
   );
 }

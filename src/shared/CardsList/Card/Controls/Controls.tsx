@@ -8,10 +8,14 @@ import * as Icons from "../../../Icons";
 import { Button } from "../../../Button";
 import { EColor, Text } from "../../../Text";
 
-export function Controls() {
+interface IControls {
+  ups: number;
+}
+
+export function Controls({ ups }: IControls) {
   return (
     <div className={styles.controls}>
-      <KarmaCounter />
+      <KarmaCounter ups={ups} />
       <div className={styles.commentsButton}>
         <CommentsButton>
           <Icons.CommentsIcon />

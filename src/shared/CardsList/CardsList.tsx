@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { postsContext } from "../context/postsContext";
+import { IPreview } from "../Post/Post";
 import { Card } from "./Card";
 import styles from "./cardslist.css";
 
@@ -7,13 +8,15 @@ interface IRespPosts {
   kind: string;
   data: IData;
 }
-
-interface IData {
+export interface IData {
   title: string;
   id: string;
   author: string;
   thumbnail: string;
   created: number;
+  selftext?: string;
+  preview: IPreview;
+  ups: number;
 }
 
 export function CardsList() {
@@ -23,7 +26,17 @@ export function CardsList() {
   return (
     <ul className={styles.cardsList}>
       {respPosts.map((post) => (
-        <Card listItem={post} key={post.data.id} />
+        <Card
+          title={post.data.title}
+          id={post.data.id}
+          author={post.data.author}
+          thumbnail={post.data.thumbnail}
+          created={post.data.created}
+          key={post.data.id}
+          selftext={post.data.selftext}
+          preview={post.data.preview}
+          ups={post.data.ups}
+        />
       ))}
     </ul>
   );

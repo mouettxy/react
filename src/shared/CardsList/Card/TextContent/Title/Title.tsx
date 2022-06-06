@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import { Post } from "../../../../Post";
+import { IData } from "../../../CardsList";
 import styles from "./title.css";
 
-interface ITitle {
-  title?: string;
-}
-
-export function Title({ title }: ITitle) {
+export function Title({
+  title,
+  id,
+  author,
+  thumbnail,
+  created,
+  selftext,
+  preview,
+  ups,
+}: IData) {
   const [isModalOpened, setIsModalOpened] = useState(false);
   return (
     <h2 className={styles.title}>
@@ -22,6 +28,14 @@ export function Title({ title }: ITitle) {
 
       {isModalOpened && (
         <Post
+          title={title}
+          author={author}
+          created={created}
+          selftext={selftext}
+          id={id}
+          thumbnail={thumbnail}
+          preview={preview}
+          ups={ups}
           onClose={() => {
             setIsModalOpened(false);
           }}

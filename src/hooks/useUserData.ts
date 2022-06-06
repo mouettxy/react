@@ -1,3 +1,4 @@
+import { saveToken } from './../store/token/actions';
 import { IUserData, meRequestAsync } from './../store/me/actions';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +10,7 @@ export function useUserData() {
   const dispatch = useDispatch();
   useEffect(()=> {
     if (window.__token__) {
-      dispatch(setToken(window.__token__));
+      dispatch(saveToken());
     }    
   }, [])
   const data = useSelector<RootState, IUserData>(state => state.me.data)
@@ -18,7 +19,7 @@ export function useUserData() {
 
   useEffect(() => {
     if (token && token.length > 0) {
-      dispatch(meRequestAsync())
+      dispatch(meRequestAsync());
     }
   }, [token]);
   return {

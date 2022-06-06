@@ -1,16 +1,48 @@
 import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { Break } from "../Break";
+import { KarmaCounter } from "../CardsList/Card/Controls/KarmaCounter";
 import { CommentForm } from "../CommentForm";
 import styles from "./post.css";
 import { PostCommentsList } from "./PostCommentsList";
 import { PostComment } from "./PostCommentsList/PostComment";
 
-interface IPost {
-  onClose?: () => void;
+interface IResolutions {
+  url: string;
 }
 
-export function Post({ onClose }: IPost) {
+export interface IPreview {
+  images: {
+    resolutions: IResolutions[];
+    source: {
+      url: string;
+    };
+  }[];
+}
+
+interface IPost {
+  onClose?: () => void;
+  title?: string;
+  id?: string;
+  author?: string;
+  thumbnail?: string;
+  created: number;
+  selftext?: string;
+  preview: IPreview;
+  ups: number;
+}
+
+export function Post({
+  title,
+  id,
+  author,
+  thumbnail,
+  created,
+  selftext,
+  preview,
+  ups,
+  onClose,
+}: IPost) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -33,42 +65,45 @@ export function Post({ onClose }: IPost) {
   const node = document.querySelector("#modal_root");
   if (!node) return null;
 
+  const createdAt = new Date(created * 1000);
+  const yyyy = createdAt.getFullYear();
+  const mm = createdAt.getMonth() + 1;
+  const dd = createdAt.getDate();
+
+  const newCreatedAt = dd + "." + mm + "." + yyyy;
+
   return ReactDOM.createPortal(
     <div className={styles.modal} ref={ref}>
-      <h2>
-        Следует отметить, что новая модель организационной деятельности поможет
-      </h2>
+      {/* CarmaCounter */}
+      <div className={styles.header}>
+        <KarmaCounter ups={ups} />
+        <div>
+          <h2 className={styles.title}>{title}</h2>
+          <div className={styles.metaData}>
+            <div className={styles.userLink}>
+              <img
+                className={styles.avatar}
+                src="https://cdn.dribbble.com/users/175710/screenshots/3183628/media/64c404e844095b76698071722f27df18.png"
+                alt="avatar"
+              />
+              <a className={styles.username} href="#user-url">
+                {author}
+              </a>
+            </div>
+            <span className={styles.createdAt}>
+              <span className={styles.publishedLabel}>опубликовано </span>
+              {newCreatedAt}
+            </span>
+          </div>
+        </div>
+      </div>
       <div className={styles.content}>
-        <p>
-          Есть над чем задуматься: тщательные исследования конкурентов
-          представляют собой не что иное, как квинтэссенцию победы маркетинга
-          над разумом и должны быть ассоциативно распределены по отраслям.
-          Прежде всего, начало повседневной работы по формированию позиции
-          однозначно фиксирует необходимость кластеризации усилий. Но сторонники
-          тоталитаризма в науке и по сей день остаются уделом либералов, которые
-          жаждут быть превращены в посмешище, хотя само их существование
-          приносит несомненную пользу обществу.
-        </p>
-        <p>
-          Есть над чем задуматься: тщательные исследования конкурентов
-          представляют собой не что иное, как квинтэссенцию победы маркетинга
-          над разумом и должны быть ассоциативно распределены по отраслям.
-          Прежде всего, начало повседневной работы по формированию позиции
-          однозначно фиксирует необходимость кластеризации усилий. Но сторонники
-          тоталитаризма в науке и по сей день остаются уделом либералов, которые
-          жаждут быть превращены в посмешище, хотя само их существование
-          приносит несомненную пользу обществу.
-        </p>
-        <p>
-          Есть над чем задуматься: тщательные исследования конкурентов
-          представляют собой не что иное, как квинтэссенцию победы маркетинга
-          над разумом и должны быть ассоциативно распределены по отраслям.
-          Прежде всего, начало повседневной работы по формированию позиции
-          однозначно фиксирует необходимость кластеризации усилий. Но сторонники
-          тоталитаризма в науке и по сей день остаются уделом либералов, которые
-          жаждут быть превращены в посмешище, хотя само их существование
-          приносит несомненную пользу обществу.
-        </p>
+        <img
+          className={styles.image}
+          src={preview.images[0].source.url}
+          alt="Post img"
+        />
+        <p>{selftext}</p>
       </div>
       <CommentForm />
       <Break top size={16} />
