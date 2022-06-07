@@ -3,7 +3,6 @@ import { IUserData, meRequestAsync } from './../store/me/actions';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState} from "../store/reducer";
-import { setToken } from '../store/token/actions';
 
 
 export function useUserData() {
