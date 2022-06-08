@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Break } from "../../../Break";
 import { Button, EButtonStyle } from "../../../Button";
-import { CommentsButton } from "../../../CardsList/Card/Controls/CommentsButton";
 import { ShareButton } from "../../../CardsList/Card/Controls/ShareButton";
-import { CommentForm } from "../../../CommentForm";
+import { FormikComment } from "../../../FormikComment";
 import * as Icons from "../../../Icons";
 import { EColor, Text } from "../../../Text";
 import styles from "./postcomment.css";
@@ -64,8 +63,8 @@ export function PostComment() {
         </Button>
       </div>
       {isReplyActive && (
-        <CommentForm
-          buttonText="reply"
+        <FormikComment
+          buttonText="Reply"
           replyReciever={`${ref.current?.innerText}, `}
         />
       )}

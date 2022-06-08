@@ -1,15 +1,13 @@
 import React, {
   ChangeEvent,
   FormEvent,
-  useContext,
   useEffect,
   useRef,
   useState,
 } from "react";
-import { commentContext } from "../context/commentContext";
 import styles from "./commentform.css";
 
-interface ICommentForm {
+export interface ICommentForm {
   buttonText?: string;
   replyReciever?: string;
 }
@@ -18,15 +16,9 @@ export function CommentForm({
   buttonText = "comment",
   replyReciever,
 }: ICommentForm) {
-  // let { value, onChange } = useContext(commentContext);
-  // if (replyReciever !== undefined) {
-  //   setValue(replyReciever);
-  // }
-  // if (value == "" && replyReciever !== undefined) {
-  //   value = replyReciever;
-  // }
-
-  const [value, setValue] = useState(replyReciever);
+  const [value, setValue] = useState(replyReciever || "");
+  const [touched, setTouched] = useState(false);
+  const [valueError, setValueError] = useState("");
 
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {
@@ -39,7 +31,20 @@ export function CommentForm({
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
+    setTouched(true);
+    setValueError(validateValue());
+
+    const isFormValid = !validateValue();
+    if (!isFormValid) return;
+
+    alert("Форма отправлена");
   }
+
+  function validateValue() {
+    if (value.length <= 3) return "Введите больше 3-х символов";
+    return "";
+  }
+
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <textarea
@@ -47,7 +52,9 @@ export function CommentForm({
         className={styles.input}
         value={value}
         onChange={handleChange}
+        aria-invalid={valueError ? "true" : undefined}
       />
+      {touched && valueError && <div>{valueError}</div>}
       <button type="submit" className={styles.button}>
         {buttonText}
       </button>

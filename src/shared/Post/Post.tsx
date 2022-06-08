@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Break } from "../Break";
 import { KarmaCounter } from "../CardsList/Card/Controls/KarmaCounter";
 import { CommentForm } from "../CommentForm";
+import { FormikComment } from "../FormikComment";
 import styles from "./post.css";
 import { PostCommentsList } from "./PostCommentsList";
 import { PostComment } from "./PostCommentsList/PostComment";
@@ -74,7 +75,6 @@ export function Post({
 
   return ReactDOM.createPortal(
     <div className={styles.modal} ref={ref}>
-      {/* CarmaCounter */}
       <div className={styles.header}>
         <KarmaCounter ups={ups} />
         <div>
@@ -100,12 +100,17 @@ export function Post({
       <div className={styles.content}>
         <img
           className={styles.image}
-          src={preview.images[0].source.url}
+          src={
+            preview.images[0].source.url !== undefined
+              ? preview.images[0].source.url
+              : "#"
+          }
           alt="Post img"
         />
         <p>{selftext}</p>
       </div>
-      <CommentForm />
+      {/* <CommentForm /> */}
+      <FormikComment />
       <Break top size={16} />
       <PostCommentsList>
         <PostComment />

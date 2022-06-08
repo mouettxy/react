@@ -31,6 +31,7 @@
 .image {
   display: flex;
   margin: 0 auto;
+  max-width: 840px;
 }
 
 .createdAt, .createdAt span {

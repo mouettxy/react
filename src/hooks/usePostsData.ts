@@ -23,7 +23,7 @@ export  function usePostsData() {
   useEffect(() => {
     if (token && token.length > 0) {
       axios
-        .get("https://oauth.reddit.com/best?sr_detal=true", {
+        .get("https://oauth.reddit.com/best?raw_json=1&sr_detail=true", {
           headers: { Authorization: `bearer ${token}` },
         })
         .then((resp) => {

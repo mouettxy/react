@@ -6,6 +6,7 @@ import { Header } from "./shared/Header";
 import { Content } from "./shared/Content";
 import { CardsList } from "./shared/CardsList";
 import { PostsContextProvider } from "./shared/context/postsContext";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import { applyMiddleware, legacy_createStore as createStore } from "redux";
 import { Provider } from "react-redux";
