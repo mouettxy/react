@@ -101,9 +101,8 @@ export function Post({
         <img
           className={styles.image}
           src={
-            preview.images[0].source.url !== undefined
-              ? preview.images[0].source.url
-              : "#"
+            preview?.images[0].source.url ??
+            "https://cdn.dribbble.com/users/175710/screenshots/3183628/media/64c404e844095b76698071722f27df18.png"
           }
           alt="Post img"
         />
