@@ -1,8 +1,7 @@
 import axios from "axios";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/reducer";
-import { postsContext } from "../context/postsContext";
 import { IPreview } from "../Post/Post";
 import { Card } from "./Card";
 import styles from "./cardslist.css";
@@ -67,7 +66,7 @@ export function CardsList() {
           }, 700);
         }
       },
-      { rootMargin: "10px" }
+      { rootMargin: "700px" }
     );
 
     if (bottomOfList.current) {

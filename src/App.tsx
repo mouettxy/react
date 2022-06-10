@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./main.global.css";
 import { hot } from "react-hot-loader/root";
 import { Layout } from "./shared/Layout";
@@ -6,7 +6,7 @@ import { Header } from "./shared/Header";
 import { Content } from "./shared/Content";
 import { CardsList } from "./shared/CardsList";
 import { PostsContextProvider } from "./shared/context/postsContext";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { BrowserRouter } from "react-router-dom";
 
 import { applyMiddleware, legacy_createStore as createStore } from "redux";
 import { Provider } from "react-redux";
@@ -20,16 +20,25 @@ const store = createStore(
 );
 
 function AppComponent() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  });
   return (
     <Provider store={store}>
-      <PostsContextProvider>
-        <Layout>
-          <Header />
-          <Content>
-            <CardsList />
-          </Content>
-        </Layout>
-      </PostsContextProvider>
+      {mounted && (
+        <BrowserRouter>
+          <PostsContextProvider>
+            <Layout>
+              <Header />
+              <Content>
+                <CardsList />
+              </Content>
+            </Layout>
+          </PostsContextProvider>
+        </BrowserRouter>
+      )}
     </Provider>
   );
 }

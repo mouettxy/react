@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
+import { useNavigate } from "react-router-dom";
 import { Break } from "../Break";
 import { KarmaCounter } from "../CardsList/Card/Controls/KarmaCounter";
 import { CommentForm } from "../CommentForm";
@@ -45,6 +46,7 @@ export function Post({
   onClose,
 }: IPost) {
   const ref = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
@@ -52,7 +54,7 @@ export function Post({
         event.target instanceof Node &&
         !ref.current?.contains(event.target)
       ) {
-        onClose?.();
+        navigate("/");
       }
     }
 
