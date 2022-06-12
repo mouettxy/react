@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Break } from "../Break";
 import { KarmaCounter } from "../CardsList/Card/Controls/KarmaCounter";
 import { CommentForm } from "../CommentForm";
@@ -47,6 +47,7 @@ export function Post({
 }: IPost) {
   const ref = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const params = useParams();
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
@@ -76,49 +77,51 @@ export function Post({
   const newCreatedAt = dd + "." + mm + "." + yyyy;
 
   return ReactDOM.createPortal(
-    <div className={styles.modal} ref={ref}>
-      <div className={styles.header}>
-        <KarmaCounter ups={ups} />
-        <div>
-          <h2 className={styles.title}>{title}</h2>
-          <div className={styles.metaData}>
-            <div className={styles.userLink}>
-              <img
-                className={styles.avatar}
-                src="https://cdn.dribbble.com/users/175710/screenshots/3183628/media/64c404e844095b76698071722f27df18.png"
-                alt="avatar"
-              />
-              <a className={styles.username} href="#user-url">
-                {author}
-              </a>
+    params.id == id && (
+      <div className={styles.modal} ref={ref}>
+        <div className={styles.header}>
+          <KarmaCounter ups={ups} />
+          <div>
+            <h2 className={styles.title}>{title}</h2>
+            <div className={styles.metaData}>
+              <div className={styles.userLink}>
+                <img
+                  className={styles.avatar}
+                  src="https://cdn.dribbble.com/users/175710/screenshots/3183628/media/64c404e844095b76698071722f27df18.png"
+                  alt="avatar"
+                />
+                <a className={styles.username} href="#user-url">
+                  {author}
+                </a>
+              </div>
+              <span className={styles.createdAt}>
+                <span className={styles.publishedLabel}>опубликовано </span>
+                {newCreatedAt}
+              </span>
             </div>
-            <span className={styles.createdAt}>
-              <span className={styles.publishedLabel}>опубликовано </span>
-              {newCreatedAt}
-            </span>
           </div>
         </div>
+        <div className={styles.content}>
+          <img
+            className={styles.image}
+            src={
+              preview?.images[0].source.url ??
+              "https://cdn.dribbble.com/users/175710/screenshots/3183628/media/64c404e844095b76698071722f27df18.png"
+            }
+            alt="Post img"
+          />
+          <p>{selftext}</p>
+        </div>
+        {/* <CommentForm /> */}
+        <FormikComment />
+        <Break top size={16} />
+        <PostCommentsList>
+          <PostComment />
+          <PostComment />
+          <PostComment />
+        </PostCommentsList>
       </div>
-      <div className={styles.content}>
-        <img
-          className={styles.image}
-          src={
-            preview?.images[0].source.url ??
-            "https://cdn.dribbble.com/users/175710/screenshots/3183628/media/64c404e844095b76698071722f27df18.png"
-          }
-          alt="Post img"
-        />
-        <p>{selftext}</p>
-      </div>
-      {/* <CommentForm /> */}
-      <FormikComment />
-      <Break top size={16} />
-      <PostCommentsList>
-        <PostComment />
-        <PostComment />
-        <PostComment />
-      </PostCommentsList>
-    </div>,
+    ),
     node
   );
 }

@@ -16,12 +16,12 @@ export function Title({
 }: IData) {
   return (
     <h2 className={styles.title}>
-      <Link className={styles.postLink} to={`post/${id}`}>
+      <Link className={styles.postLink} to={`posts/${id}`}>
         {title}
       </Link>
       <Routes>
         <Route
-          path="post/:id"
+          path="posts/:id"
           element={
             <Post
               title={title}

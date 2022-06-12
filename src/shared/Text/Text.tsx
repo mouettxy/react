@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./text.css";
 import classNames from "classNames";
 
+type ICenter = "center";
+
 export enum EColor {
   black = "black",
   orange = "orange",
@@ -26,6 +28,7 @@ interface ITextProps {
   desktopSize?: TSizes;
   color?: EColor;
   bold?: boolean;
+  center?: boolean;
 }
 
 export function Text(props: ITextProps) {
@@ -38,11 +41,13 @@ export function Text(props: ITextProps) {
     mobileSize,
     tabletSize,
     desktopSize,
+    center,
   } = props;
 
   const classes = classNames(
     styles[`s${size}`],
     styles[color],
+    { [styles.center]: center },
     { [styles.bold]: bold },
     { [styles[`m${mobileSize}`]]: mobileSize },
     { [styles[`t${tabletSize}`]]: tabletSize },

@@ -6,13 +6,14 @@ import { Header } from "./shared/Header";
 import { Content } from "./shared/Content";
 import { CardsList } from "./shared/CardsList";
 import { PostsContextProvider } from "./shared/context/postsContext";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { applyMiddleware, legacy_createStore as createStore } from "redux";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { rootReducer } from "./store/reducer";
 import thunk from "redux-thunk";
+import { Text } from "./shared/Text";
 
 const store = createStore(
   rootReducer,
@@ -33,7 +34,26 @@ function AppComponent() {
             <Layout>
               <Header />
               <Content>
-                <CardsList />
+                <Routes>
+                  <Route
+                    path="/"
+                    element={
+                      <Text center size={14}>
+                        Пожалуйста, авторизируйтесь
+                      </Text>
+                    }
+                  />
+                  <Route path="/auth" element={<Navigate to="/posts" />} />
+                  <Route path="/posts" element={<CardsList />} />
+                  <Route
+                    path="*"
+                    element={
+                      <Text center size={14}>
+                        Страница не найдена
+                      </Text>
+                    }
+                  />
+                </Routes>
               </Content>
             </Layout>
           </PostsContextProvider>
