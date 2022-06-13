@@ -28,10 +28,15 @@ export function CardsList() {
   const [errorLoading, setErrorLoading] = useState("");
   const [nextAfter, setNextAfter] = useState("");
   const [loadCounter, setLoadCounter] = useState(-1);
+  const [initialLoad, setInitialLoad] = useState(false);
 
   const bottomOfList = useRef<HTMLDivElement>(null);
 
   async function load() {
+    if (!initialLoad) {
+      setInitialLoad(true);
+      return;
+    }
     setLoading(true);
     setErrorLoading("");
 
