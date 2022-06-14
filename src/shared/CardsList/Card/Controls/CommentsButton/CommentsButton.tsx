@@ -11,5 +11,6 @@ export function CommentsButton({
   children,
   buttonStyle,
 }: ICommentsButtonProps) {
-  return <Button {...buttonStyle}>{children}</Button>;
+  const styles = buttonStyle ? buttonStyle : {};
+  return <Button {...styles}>{children}</Button>;
 }

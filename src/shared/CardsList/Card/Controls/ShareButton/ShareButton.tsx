@@ -8,5 +8,6 @@ interface IShareButtonProps {
 }
 
 export function ShareButton({ children, buttonStyle }: IShareButtonProps) {
-  return <Button {...buttonStyle}>{children}</Button>;
+  const styles = buttonStyle ? buttonStyle : {};
+  return <Button {...styles}>{children}</Button>;
 }

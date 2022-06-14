@@ -8,5 +8,6 @@ interface ISaveButtonProps {
 }
 
 export function SaveButton({ children, buttonStyle }: ISaveButtonProps) {
-  return <Button {...buttonStyle}>{children}</Button>;
+  const styles = buttonStyle ? buttonStyle : {};
+  return <Button {...styles}>{children}</Button>;
 }
